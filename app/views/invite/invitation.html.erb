@@ -2,6 +2,8 @@ Hello!
 <br/>
 Someone sent You invitation to ASAP TODO LIST!
 <br/><br/>
+Link to list: <a href="<%= root_path %><%= list_path(@list.list_hash) %>"><%= root_path %><%= list_path(@list.list_hash) %></a>
+<br/><br/>
 <ul>
 <% @list.list_items.each do |i| %>
 	<li><%= i.title %> <%= i.status %></li>
