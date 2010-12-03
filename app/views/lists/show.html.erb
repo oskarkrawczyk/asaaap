@@ -1,0 +1,19 @@
+<h1>List</h1>
+<p>Your list url: <strong><%= list_path(@list.list_hash) %></strong></p>
+
+<%= form_for @list, :url => list_path(@list.list_hash) do |f| %>
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+	<div>
+		<%= f.fields_for :list_items do |i| %>
+			<p><%= i.label :title %>
+			<%= i.text_field :title %>
+			<%= i.label :status %>
+			<%= i.check_box :status, {}, checked_value = "done", unchecked_value = nil %>
+			<%= i.label :_destroy %>
+			<%= i.check_box :_destroy %>
+			</p>
+		<% end %>
+	</div>
+	<%= f.submit %>
+<% end %>
