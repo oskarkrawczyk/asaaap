@@ -1,6 +1,5 @@
 <h1>List</h1>
-<p>Your list url: <strong><%= list_path(@list.list_hash) %></strong></p>
-
+<p>Your list url: <strong><%= root_url %><%= list_path(@list.list_hash) %></strong></p>
 <%= form_for @list, :url => list_path(@list.list_hash) do |f| %>
 	<%= f.label :name %>
 	<%= f.text_field :name %>
