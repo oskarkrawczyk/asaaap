@@ -1,0 +1,5 @@
+<%= form_for :invitation, :url => invitations_path do |f| %>
+	<%= f.hidden_field :list_hash, :value => "abe6a" %>
+	<%= f.text_field :email %>
+	<%= f.submit "Send" %>
+<% end %>

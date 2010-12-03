@@ -1,0 +1,9 @@
+Hello!
+<br/>
+Someone sent You invitation to ASAP TODO LIST!
+<br/><br/>
+<ul>
+<% @list.list_items.each do |i| %>
+	<li><%= i.title %> <%= i.status %></li>
+<% end %>
+</ul>
