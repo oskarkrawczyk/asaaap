@@ -31,6 +31,7 @@ class ListsController < ApplicationController
         format.xml { head :ok }
         format.json { @list.to_json }
       end
+    end
   end
   
 end
