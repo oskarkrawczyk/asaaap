@@ -48,9 +48,12 @@ a {
 			display: block;
 			width: 412px;
 			outline: none;
+			-webkit-box-shadow: 0 1px 2px #ccc;
+			-webkit-transition: all 0.3s;
 		}
 		
 		#omni-box fieldset input:focus {
+			-webkit-box-shadow: 0 0 2px #AD5B51;
 			border: solid 1px #AD2A1A;
 		}
 		
@@ -77,7 +80,7 @@ a {
 			border-bottom: solid 1px #EAEDEC;
 			position: relative;
 		}
-	
+
 			.todoList ul li input[type='checkbox'] {
 				font-size: 1.2em;
 			}
@@ -107,8 +110,6 @@ a {
 				-webkit-transform: scale(1);
 			}
 
-
-
 #completed-todo.todoList ul li {
 	padding: 6px 3px;
 	border-bottom: none;
@@ -123,3 +124,9 @@ a {
 	#completed-todo.todoList ul li a {
 		top: 4px;
 	}
+
+#ie {
+	text-align: center;
+	padding: 50px;
+	display: none;
+}
