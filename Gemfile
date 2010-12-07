@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem "rails", "3.0.3"
-gem "pg"
+# gem "pg"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
