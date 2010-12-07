@@ -1,4 +1,34 @@
-<h1>List</h1>
+<form id="omni-box" action="" method="post" accept-charset="utf-8">
+	<fieldset>
+		<legend></legend>
+		
+		<input type="text" placeholder="Enter a task name and hit Return" />
+	</fieldset>
+
+	<div class="submitCont">
+		<input type="submit" value="Add to list!" />
+	</div>
+</form>
+
+<form id="new-todo" class="todoList">
+	<h2>Some todo</h2>
+	<ul id="active-todo">
+		<!-- <li><input type="checkbox" value="" /> <span>Get milk and make pancakes</span> <a title="" href="#">Delete</a></li>
+		<li><input type="checkbox" value="" /> <span>Get milk and make pancakes</span> <a title="" href="#">Delete</a></li>
+		<li><input type="checkbox" value="" /> <span>Get milk and make pancakes</span> <a title="" href="#">Delete</a></li> -->
+	</ul>
+</form> <!-- /new-todo -->
+
+<form id="completed-todo" class="todoList">
+	<h2>Done!</h2>
+	<ul id="done-todo">
+		<!-- <li><input type="checkbox" value="" /> <span>Get milk and make pancakes</span> <a title="" href="#">Delete</a></li>
+		<li><input type="checkbox" value="" /> <span>Get milk and make pancakes</span> <a title="" href="#">Delete</a></li>
+		<li><input type="checkbox" value="" /> <span>Get milk and make pancakes</span> <a title="" href="#">Delete</a></li> -->
+	</ul>
+</form> <!-- /new-todo -->
+
+<!-- <h1>List</h1>
 <p>Your list url: <strong><%= root_url %><%= list_path(@list.list_hash) %></strong></p>
 <%= form_for @list, :url => list_path(@list.list_hash) do |f| %>
 	<%= f.label :name %>
@@ -15,4 +45,4 @@
 		<% end %>
 	</div>
 	<%= f.submit %>
-<% end %>
+<% end %> -->

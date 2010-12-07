@@ -1,5 +1,5 @@
 class Invite < ActionMailer::Base
-  default :from => "do-not-reply@localhost"
+  default :from => "asaptodo@gmail.com"
   
   def invitation(invitation)  
     @list = List.find_by_list_hash(invitation[:list_hash])

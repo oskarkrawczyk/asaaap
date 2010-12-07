@@ -1,14 +1,97 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Todolist</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
 
-<%= yield %>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta http-equiv="content-language" content="en" />
+		<meta http-equiv="imagetoolbar" content="no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
+		
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<meta name="language" content="en-US" />
+		<meta name="classification" content="public" />
+		<meta name="resource-type" content="document" />
+		<meta name="author" content="Oskar Krawczyk" />
+		<meta name="copyright" content="Oskar Krawczyk" />
+		
+		<!-- iPhone -->
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+		<!-- <meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-touch-fullscreen" content="yes" /> -->
+				
+		<!-- DCMI -->
+		<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+		<meta name="DC.title" lang="en" content="" />
+		<meta name="DC.description" lang="en" content="" />
+		<meta name="DC.language" scheme="RFC1766" content="en" />
+		<meta name="DC.coverage" content="World" />
+		<meta name="DC.format" scheme="IMT" content="text/html" />
+		<meta name="DC.contributor" content="Oskar Krawczyk" />
+		<meta name="DC.author" content="Oskar Krawczyk" />
+		<meta name="DC.publisher" content="Oskar Krawczyk" />
+		
+		<meta name="robots" content="index,follow" />
+		<meta name="googlebot" content="index,follow" />
+		<meta name="geo.region" content="UK" />
+		<meta name="geo.placename" content="England" />
+		
+		<%= stylesheet_link_tag "reset", "screen" %>
+		
+		<!--[if IE>#wrapper {display: none}<![endif]-->
+		
+	  <%= javascript_include_tag "mootools-core-1.3-full-compat", "mootools-more", "common" %>
 
-</body>
+	  <%= csrf_meta_tag %>
+		
+		<script type="text/javascript" charset="utf-8">
+			//<![CDATA[
+				var todoLists = {
+						permalinkHash: 'p20as8',
+						active: [
+							{
+								id: '1',
+								title: 'some task'
+							},
+							{
+								id: '2',
+								title: 'some task 2'
+							},
+							{
+								id: '3',
+								title: 'some task 3'
+							}
+						],
+						done: [
+							{
+								id: '4',
+								title: 'done task'
+							}
+						]
+				};
+				
+				window.addEvents({
+					domready: function(){
+						new AsapList(todoLists);
+					}
+				});
+		    //]]>
+		</script>
+
+		<title>ASAP! A Simple Anonymous Plan</title>
+	</head>
+
+	<body>
+		
+		<div id="wrapper">
+			<div id="page-branding">
+				<h1><a title="" href="#">ASAP! A Simple Anonymous Plan</a></h1>
+			</div> <!-- /page-brading -->
+			
+			<%= yield %>
+			
+		</div> 
+		
+	</body>
 </html>

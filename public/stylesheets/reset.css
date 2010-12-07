@@ -1,0 +1,28 @@
+body, h1, h2, h3, h4, h5, h6, p, blockquote, ul, ol, li, dd, dt, dl, form, fieldset, input, textarea {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	border: none;
+	font-weight: normal;
+	vertical-align: top;
+	line-height: 100%;
+	font-family: inherit;
+	
+}
+
+legend {
+	display: none;
+}
+
+.abActions:after {
+	content: ' ';
+	clear: both;
+	height: 0;
+	font-size: 0;
+	overflow: hidden;
+	width: 100%;
+}
+
+p {
+	line-height: 1.4em;
+}
