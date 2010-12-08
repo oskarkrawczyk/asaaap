@@ -71,7 +71,7 @@
 
 		moveFromList: function(){
 			this.element.lists.addEvents({
-				'change:relay(input)': this.moveItem,
+				'change:relay(input)': this.moveItem.bind(this),
 				'click:relay(a)': this.deleteItem
 			});
 		},
@@ -97,21 +97,35 @@
 			}
 		},
 
-		moveItem: function(){
-			this.getParent().moveTo(this.checked ? self.element.doneList : self.element.activeList);
+		moveItem: function(event){
+			event.target.getParent().moveTo(event.target.checked ? this.element.doneList : this.element.activeList);
+			this.todo.done = this.updateList(this.element.doneList);
+			this.todo.active = this.updateList(this.element.activeList);
+		},
+		
+		updateList: function(list){
+			var updatedList = [];
+			list.getElements('li').each(function(item){
+				updatedList.include({
+					id: item.get('data-id'),
+					title: item.getElement('span').get('html')
+				});
+			});
+			return updatedList;
 		},
 
 		deleteItem: function(event){
 			event.stop();
+			var list = this.getPrevious('input').checked ? self.todo.done : self.todo.active;
 			var itemCont = this.getParent();
-			var id = itemCont.get('data-id');
-
-			Object.each(this.checked ? self.todo.done : self.todo.active, function(item, index){
-				if (item.id == this){
-					self.todo.active.erase(item);
+			Object.each(list, function(item){
+				if (item.id == itemCont.get('data-id')){
 					itemCont.destroy();
+					list = list.erase(item);
 				}
-			}.bind(id));
+			});
+			
+			console.log(self.todo.active, self.todo.done);
 		}
 
 	});

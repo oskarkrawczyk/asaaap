@@ -11,6 +11,7 @@ body {
 a {
 	text-decoration: none;
 	color: #AD2A1A;
+	outline: none;
 }
 
 #page-branding {
@@ -60,24 +61,21 @@ a {
 }
 
 	#omni-box fieldset {
-		padding: 8px;
-		background: rgba(39, 44, 48, 0.05);
+		padding: 10px 10px 19px;
+		background: #F7F9F8 url(/images/omnibg.png) 0 0 no-repeat;
 	}
 
 		#omni-box fieldset input {
-			border: solid 1px #AAB1BB;
-			padding: 12px 10px;
+			border: solid 1px #8B2117;
+			padding: 13px 10px;
 			font-size: 1em;
 			display: block;
-			width: 412px;
+			width: 408px;
 			outline: none;
-			-webkit-box-shadow: 0 1px 2px #ccc;
-			-webkit-transition: all 0.3s;
 		}
 		
 		#omni-box fieldset input:focus {
-			-webkit-box-shadow: 0 0 2px #AD5B51;
-			border: solid 1px #AD2A1A;
+			border: solid 1px #8B2117;
 		}
 		
 		#omni-box .submitCont input {
@@ -117,6 +115,9 @@ a {
 				width: 18px;
 				display: block;
 				border-radius: 20px;
+				-webkit-border-radius: 20px;
+				-moz-border-radius: 20px;
+				-o-border-radius: 20px;
 				position: absolute;
 				top: 10px;
 				right: 3px;
