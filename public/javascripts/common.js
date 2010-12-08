@@ -1,8 +1,7 @@
-
 (function(){
 
 	Element.implement({
-		moveTo: function(element) {
+		moveTo: function(element){
 			var clone = this.clone();
 			clone.inject(element, 'top');
 			clone.highlight();
@@ -28,88 +27,93 @@
 
 		todo: {},
 
-		initialize: function(presetList) {
+		initialize: function(presetList){
 			self = this;
 			this.todo = presetList;
 			this.template = '<li data-id="{id}"><input type="checkbox" /> <span>{title}</span> <a href="#">Delete</a></li>';
 			this.activeTemplate = '';
 			this.doneTemplate = '';
-
 			this.element = {
 				activeList: document.id('active-todo'),
 				doneList: document.id('done-todo'),
-				lists: document.getElements('ul')
+				lists: document.getElements('ul'),
+				omnibox: document.id('omni-box')
 			};
 
+			this.setup();
+		},
+
+		setup: function(){
+			this.populateLists();
+			this.moveFromList();
+			this.addItem();
+		},
+		
+		populateLists: function(){
+			
+			// populate the active items
 			this.todo.active.each(function(item) {
 				this.activeTemplate += this.template.substitute(item);
 			}, this);
 			this.element.activeList.adopt(Elements.from(this.activeTemplate));
 
+			// populate the inactive items
 			this.todo.done.each(function(item) {
 				this.doneTemplate += this.template.substitute(item);
 			}, this);
 			this.element.doneList.adopt(Elements.from(this.doneTemplate));
+			
+			// make sure the checkboxes are checked
 			this.element.doneList.getElements('input').each(function(field){
 				field.checked = true;
 			});
-
-			this.setup();
 		},
 
-		setup: function() {
-			this.moveFromList();
-			this.addItem();
-		},
-
-		moveFromList: function() {
+		moveFromList: function(){
 			this.element.lists.addEvents({
 				'change:relay(input)': this.moveItem,
 				'click:relay(a)': this.deleteItem
 			});
 		},
 
-		addItem: function() {
-			document.id('omni-box').addEvents({
-				submit: function(event) {
-					event.stop();
-					var itemFrom = this.getElement('input[type=text]');
-					var itemData = {
-						title: itemFrom.get('value'),
-						id: Number.random(10000, 99999)
-					};
-					if (itemFrom.get('value').trim() !== '') {
-						var item = self.template.substitute(itemData);
-						Elements.from(item).inject(self.element.activeList, 'top').highlight();
-						self.todo.active = [itemData].append(self.todo.active);
-						itemFrom.set('value', '');
-					}
-				}
+		addItem: function(){
+			this.element.omnibox.addEvents({
+				submit: this.submitItem.bind(this)
 			});
 		},
-
-		moveItem: function() {
-			var item = this.getParent();
-			item.moveTo(this.checked ? self.element.doneList : self.element.activeList);
+		
+		submitItem: function(event){
+			event.stop();
+			var itemFrom = event.target.getElement('input[type=text]');
+			var itemData = {
+				title: itemFrom.get('value'),
+				id: Number.random(10000, 99999)
+			};
+			if (itemFrom.get('value').trim() !== ''){
+				var item = this.template.substitute(itemData);
+				Elements.from(item).inject(this.element.activeList, 'top').highlight();
+				this.todo.active = [itemData].append(this.todo.active);
+				itemFrom.set('value', '');
+			}
 		},
 
-		deleteItem: function(event) {
+		moveItem: function(){
+			this.getParent().moveTo(this.checked ? self.element.doneList : self.element.activeList);
+		},
+
+		deleteItem: function(event){
 			event.stop();
 			var itemCont = this.getParent();
 			var id = itemCont.get('data-id');
 
-			Object.each(this.checked ? self.todo.done : self.todo.active, function(item, index) {
-				if (item.id == this) {
+			Object.each(this.checked ? self.todo.done : self.todo.active, function(item, index){
+				if (item.id == this){
 					self.todo.active.erase(item);
 					itemCont.destroy();
 				}
 			}.bind(id));
-
-			console.log(self.todo.active);
 		}
 
 	});
-
-	// new AsapList();
 
 })();

@@ -25,13 +25,36 @@ a {
 			width: 264px;
 			display: block;
 			text-indent: -900em;
-			margin: 50px auto;
+			margin: 40px auto;
 		}
 
 #wrapper {
 	width: 450px;
-	margin: 0 auto 50px;
+	margin: 0 auto 40px;
+	position: relative;
 }
+
+#agent {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	margin-left: 250px;
+	width: 66px;
+	height: 66px;
+	background: url(/images/info.png) 0 100% no-repeat;
+}
+
+	#agent span {
+		display: block;
+		background: url(/images/loader.gif) 50% 15px no-repeat;
+		width: 66px;
+		height: 66px;
+		color: #fff;
+		font-size: .9em;
+		text-align: center;
+		line-height: 90px;
+	}
+	
 
 #omni-box {
 }
@@ -125,8 +148,48 @@ a {
 		top: 4px;
 	}
 
+
 #ie {
 	text-align: center;
 	padding: 50px;
 	display: none;
 }
+
+
+/*
+
+Add it on webkit
+
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+	margin: 10px;
+}
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:decrement,
+::-webkit-scrollbar-button:start:increment,
+::-webkit-scrollbar-button:end:increment,
+::-webkit-scrollbar-button:vertical:increment,
+::-webkit-scrollbar-button:horizontal:increment {
+	display: none;
+}
+
+::-webkit-scrollbar-track-piece {
+	background-color: rgba(0, 0, 0, 0.1);
+	-webkit-border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+	height: 50px;
+	background-color: rgba(0, 0, 0, 0.3);
+	-webkit-border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+	width: 50px;
+	background-color: rgba(0, 0, 0, 0.3);
+	-webkit-border-radius: 4px;
+}
+
+*/
