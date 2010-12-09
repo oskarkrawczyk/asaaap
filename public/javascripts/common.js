@@ -72,7 +72,7 @@
 		moveFromList: function(){
 			this.element.lists.addEvents({
 				'change:relay(input)': this.moveItem.bind(this),
-				'click:relay(a)': this.deleteItem
+				'click:relay(a)': this.deleteItem.bind(this)
 			});
 		},
 
@@ -116,8 +116,8 @@
 
 		deleteItem: function(event){
 			event.stop();
-			var list = this.getPrevious('input').checked ? self.todo.done : self.todo.active;
-			var itemCont = this.getParent();
+			var list = event.target.getPrevious('input').checked ? this.todo.done : this.todo.active;
+			var itemCont = event.target.getParent();
 			Object.each(list, function(item){
 				if (item.id == itemCont.get('data-id')){
 					itemCont.destroy();
@@ -125,7 +125,7 @@
 				}
 			});
 			
-			console.log(self.todo.active, self.todo.done);
+			console.log(this.todo.active, this.todo.done);
 		}
 
 	});
