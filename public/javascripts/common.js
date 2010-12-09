@@ -71,8 +71,8 @@
 
 		moveFromList: function(){
 			this.element.lists.addEvents({
-				'change:relay(input)': this.moveItem,
-				'click:relay(a)': this.deleteItem
+				'change:relay(input)': this.moveItem.bind(this),
+				'click:relay(a)': this.deleteItem.bind(this)
 			});
 		},
 
@@ -97,21 +97,35 @@
 			}
 		},
 
-		moveItem: function(){
-			this.getParent().moveTo(this.checked ? self.element.doneList : self.element.activeList);
+		moveItem: function(event){
+			event.target.getParent().moveTo(event.target.checked ? this.element.doneList : this.element.activeList);
+			this.todo.done = this.updateList(this.element.doneList);
+			this.todo.active = this.updateList(this.element.activeList);
+		},
+		
+		updateList: function(list){
+			var updatedList = [];
+			list.getElements('li').each(function(item){
+				updatedList.include({
+					id: item.get('data-id'),
+					title: item.getElement('span').get('html')
+				});
+			});
+			return updatedList;
 		},
 
 		deleteItem: function(event){
 			event.stop();
-			var itemCont = this.getParent();
-			var id = itemCont.get('data-id');
-
-			Object.each(this.checked ? self.todo.done : self.todo.active, function(item, index){
-				if (item.id == this){
-					self.todo.active.erase(item);
+			var list = event.target.getPrevious('input').checked ? this.todo.done : this.todo.active;
+			var itemCont = event.target.getParent();
+			Object.each(list, function(item){
+				if (item.id == itemCont.get('data-id')){
 					itemCont.destroy();
+					list = list.erase(item);
 				}
-			}.bind(id));
+			});
+			
+			console.log(this.todo.active, this.todo.done);
 		}
 
 	});
