@@ -45,7 +45,6 @@
 		},
 
 		setup: function(){
-			this.hideAgent(true);
 			this.populateLists();
 			this.moveFromList();
 			this.addItem();

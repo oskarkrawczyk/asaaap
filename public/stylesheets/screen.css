@@ -37,7 +37,7 @@ a {
 
 #agent {
 	position: fixed;
-	top: 0;
+	top: -80px;
 	left: 50%;
 	margin-left: 250px;
 	width: 66px;
