@@ -55,7 +55,34 @@ a {
 		text-align: center;
 		line-height: 90px;
 	}
+
+#intro-text {
+	text-align: center;
+	padding: 70px 0 10px;
+}
+
+#create-list {
+	text-align: center;
+	background: #F7F9F8 url(/images/omnibg.png) 0 0 no-repeat;
+	width: 279px;
+	margin: 0 auto;
+}
+
+	#create-list a {
+		display: block;
+		font-family: Lobster, serif;
+		color: #fff;
+		font-size: 1.6em;
+		padding: 21px 0 26px;
+		text-shadow: 0 1px 2px #4F1610;
+		
+		-webkit-transition: all 0.3s;
+		-webkit-transform: scale(1);
+	}
 	
+	#create-list a:hover {
+		-webkit-transform: scale(1.1);
+	}
 
 #omni-box {
 }
