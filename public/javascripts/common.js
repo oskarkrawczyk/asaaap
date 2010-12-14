@@ -45,7 +45,7 @@
 		},
 
 		setup: function(){
-			this.hideAgent();
+			this.hideAgent(true);
 			this.populateLists();
 			this.moveFromList();
 			this.addItem();
@@ -89,7 +89,7 @@
 			var itemFrom = event.target.getElement('input[type=text]');
 			var itemData = {
 				title: itemFrom.get('value'),
-				id: Number.random(10000, 99999)
+				id: String.uniqueID()
 			};
 			if (itemFrom.get('value').trim() !== ''){
 				var item = this.template.substitute(itemData);
@@ -111,8 +111,8 @@
 			this.element.agent.tween('top', 0);
 		},
 		
-		hideAgent: function(){
-			this.element.agent.tween('top', -80);
+		hideAgent: function(instant){
+			this.element.agent[(instant ? 'setStyle' : 'tween')]('top', -80);
 		},
 		
 		updateList: function(list){
