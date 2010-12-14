@@ -110,8 +110,8 @@
 			this.element.agent.tween('top', 0);
 		},
 		
-		hideAgent: function(instant){
-			this.element.agent[(instant ? 'setStyle' : 'tween')]('top', -80);
+		hideAgent: function(){
+			this.element.agent.tween('top', -80);
 		},
 		
 		updateList: function(list){
