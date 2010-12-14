@@ -140,12 +140,10 @@
 		},
 		
 		sendLists: function(mode, itemId){
-			console.log(mode, itemId);
-			
 			new Request.JSON({
-				url: '/',
-				method: 'post',
-				data: Object.toQueryString(this.todo),
+				url: '/lists/{permalinkHash}'.substitute(todoLists),
+				method: mode ? 'post' : 'put',
+				data: Object.toQueryString(mode ? itemId : this.todo),
 				onSuccess: this.hideAgent.bind(this),
 				onRequest: this.showAgent.bind(this)
 			}).send();
