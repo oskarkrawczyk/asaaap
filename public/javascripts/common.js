@@ -37,13 +37,15 @@
 				activeList: document.id('active-todo'),
 				doneList: document.id('done-todo'),
 				lists: document.getElements('ul'),
-				omnibox: document.id('omni-box')
+				omnibox: document.id('omni-box'),
+				agent: document.id('agent')
 			};
 
 			this.setup();
 		},
 
 		setup: function(){
+			this.hideAgent(true);
 			this.populateLists();
 			this.moveFromList();
 			this.addItem();
@@ -87,7 +89,7 @@
 			var itemFrom = event.target.getElement('input[type=text]');
 			var itemData = {
 				title: itemFrom.get('value'),
-				id: Number.random(10000, 99999)
+				id: String.uniqueID()
 			};
 			if (itemFrom.get('value').trim() !== ''){
 				var item = this.template.substitute(itemData);
@@ -95,12 +97,22 @@
 				this.todo.active = [itemData].append(this.todo.active);
 				itemFrom.set('value', '');
 			}
+			this.sendLists();
 		},
 
 		moveItem: function(event){
 			event.target.getParent().moveTo(event.target.checked ? this.element.doneList : this.element.activeList);
 			this.todo.done = this.updateList(this.element.doneList);
 			this.todo.active = this.updateList(this.element.activeList);
+			this.sendLists();
+		},
+		
+		showAgent: function(){
+			this.element.agent.tween('top', 0);
+		},
+		
+		hideAgent: function(instant){
+			this.element.agent[(instant ? 'setStyle' : 'tween')]('top', -80);
 		},
 		
 		updateList: function(list){
@@ -125,7 +137,17 @@
 				}
 			});
 			
-			console.log(this.todo.active, this.todo.done);
+			this.sendLists();
+		},
+		
+		sendLists: function(){
+			new Request.JSON({
+				url: '/',
+				method: 'post',
+				data: Object.toQueryString(this.todo),
+				onSuccess: this.hideAgent.bind(this),
+				onRequest: this.showAgent.bind(this)
+			}).send();
 		}
 
 	});
