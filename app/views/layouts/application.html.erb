@@ -41,35 +41,7 @@
 		
 		<script type="text/javascript" charset="utf-8">
 			//<![CDATA[
-				var todoLists = {
-						permalinkHash: 'p20as8',
-						active: [
-							{
-								id: '1',
-								title: 'some task'
-							},
-							{
-								id: '2',
-								title: 'some task 2'
-							},
-							{
-								id: '3',
-								title: 'some task 3'
-							}
-						],
-						done: [
-							{
-								id: '4',
-								title: 'done task'
-							}
-						]
-				};
-				
-				window.addEvents({
-					domready: function(){
-						new AsapList(todoLists);
-					}
-				});
+			<%= yield :script %>
 		    //]]>
 		</script>
 

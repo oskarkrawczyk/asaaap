@@ -1,3 +1,29 @@
+<% content_for :script do %>
+var todoLists = {
+		permalinkHash: '<%= @list.list_hash %>',
+		active: [
+		<% @list.list_items.each do |i| %>
+			{
+				id: '<%= i.id %>',
+				title: '<%= i.title %>'
+			},
+		<% end %>
+		],
+		done: [
+			{
+				id: '4',
+				title: 'done task'
+			}
+		]
+};
+
+window.addEvents({
+	domready: function(){
+		new AsapList(todoLists);
+	}
+});
+<% end %>
+
 <form id="omni-box" action="/" method="post" accept-charset="utf-8">
 	<fieldset>
 		<legend>Enter a task name</legend>
@@ -19,7 +45,7 @@
 	<ul id="done-todo"></ul>
 </form> <!-- /new-todo -->
 
-<!-- <h1>List</h1>
+<h1>List</h1>
 <p>Your list url: <strong><%= root_url %><%= list_path(@list.list_hash) %></strong></p>
 <%= form_for @list, :url => list_path(@list.list_hash) do |f| %>
 	<%= f.label :name %>
@@ -36,4 +62,4 @@
 		<% end %>
 	</div>
 	<%= f.submit %>
-<% end %> -->
+<% end %>

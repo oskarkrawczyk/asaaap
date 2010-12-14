@@ -142,8 +142,8 @@
 		
 		sendLists: function(){
 			new Request.JSON({
-				url: '/',
-				method: 'post',
+				url: '/lists/'+todoLists.permalinkHash,
+				method: 'put',
 				data: Object.toQueryString(this.todo),
 				onSuccess: this.hideAgent.bind(this),
 				onRequest: this.showAgent.bind(this)
