@@ -134,13 +134,14 @@
 				if (item.id == itemCont.get('data-id')){
 					itemCont.destroy();
 					list = list.erase(item);
+					this.sendLists('delete', item.id);
 				}
-			});
-			
-			this.sendLists();
+			}.bind(this));
 		},
 		
-		sendLists: function(){
+		sendLists: function(mode, itemId){
+			console.log(mode, itemId);
+			
 			new Request.JSON({
 				url: '/',
 				method: 'post',
