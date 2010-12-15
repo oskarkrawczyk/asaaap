@@ -136,16 +136,16 @@
 				if (item.id == itemCont.get('data-id')){
 					itemCont.destroy();
 					list = list.erase(item);
-					this.sendLists('delete', item.id);
+					this.sendLists();
 				}
 			}.bind(this));
 		},
 		
-		sendLists: function(mode, itemId){
+		sendLists: function(){
 			new Request({
 				url: '/lists/{permalinkHash}'.substitute(todoLists),
-				method: mode ? 'post' : 'put',
-				data: Object.toQueryString(mode ? itemId : this.todo),
+				method: 'put',
+				data: Object.toQueryString(this.todo),
 				onSuccess: this.hideAgent.bind(this),
 				onRequest: this.showAgent.bind(this)
 			}).send();
