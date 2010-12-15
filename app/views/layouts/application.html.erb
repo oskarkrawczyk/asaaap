@@ -34,22 +34,21 @@
 				#ie {display: block}
 			</style>
 		<![endif]-->
-		
+
 	  <%= javascript_include_tag "mootools-core-1.3-full-compat", "mootools-more", "common" %>
 
 	  <%= csrf_meta_tag %>
-		
+
 		<script type="text/javascript" charset="utf-8">
 			//<![CDATA[
-			<%= yield :script %>
-		    //]]>
+				<%= yield :script %>
+			//]]>
 		</script>
 
 		<title>ASAP! A Simple Anonymous Plan</title>
 	</head>
 
 	<body>
-		
 		<div id="wrapper">
 			<div id="page-branding">
 				<h1><a title="ASAP! A Simple Anonymous Plan" href="/">ASAP! A Simple Anonymous Plan</a></h1>

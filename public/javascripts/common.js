@@ -45,7 +45,6 @@
 		},
 
 		setup: function(){
-			this.hideAgent(true);
 			this.populateLists();
 			this.moveFromList();
 			this.addItem();
@@ -111,8 +110,8 @@
 			this.element.agent.tween('top', 0);
 		},
 		
-		hideAgent: function(instant){
-			this.element.agent[(instant ? 'setStyle' : 'tween')]('top', -80);
+		hideAgent: function(){
+			this.element.agent.tween('top', -80);
 		},
 		
 		updateList: function(list){
@@ -134,17 +133,16 @@
 				if (item.id == itemCont.get('data-id')){
 					itemCont.destroy();
 					list = list.erase(item);
+					this.sendLists('delete', item.id);
 				}
-			});
-			
-			this.sendLists();
+			}.bind(this));
 		},
 		
-		sendLists: function(){
+		sendLists: function(mode, itemId){
 			new Request.JSON({
-				url: '/lists/'+todoLists.permalinkHash,
-				method: 'put',
-				data: Object.toQueryString(this.todo),
+				url: '/lists/{permalinkHash}'.substitute(todoLists),
+				method: mode ? 'post' : 'put',
+				data: Object.toQueryString(mode ? itemId : this.todo),
 				onSuccess: this.hideAgent.bind(this),
 				onRequest: this.showAgent.bind(this)
 			}).send();
