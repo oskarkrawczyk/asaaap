@@ -2,7 +2,7 @@
 var todoLists = {
 		permalinkHash: '<%= @list.list_hash %>',
 		active: [
-		<% @list.list_items.each do |i| %>
+		<% @list.list_items.where(:status => "active").each do |i| %>
 			{
 				id: '<%= i.id %>',
 				title: '<%= i.title %>'
@@ -10,10 +10,12 @@ var todoLists = {
 		<% end %>
 		],
 		done: [
-			{
-				id: '4',
-				title: 'done task'
-			}
+			<% @list.list_items.where(:status => "done").each do |i| %>
+				{
+					id: '<%= i.id %>',
+					title: '<%= i.title %>'
+				},
+			<% end %>
 		]
 };
 
@@ -45,7 +47,7 @@ window.addEvents({
 	<ul id="done-todo"></ul>
 </form> <!-- /new-todo -->
 
-<h1>List</h1>
+<!-- <h1>List</h1>
 <p>Your list url: <strong><%= root_url %><%= list_path(@list.list_hash) %></strong></p>
 <%= form_for @list, :url => list_path(@list.list_hash) do |f| %>
 	<%= f.label :name %>
@@ -62,4 +64,4 @@ window.addEvents({
 		<% end %>
 	</div>
 	<%= f.submit %>
-<% end %>
+<% end %> -->
