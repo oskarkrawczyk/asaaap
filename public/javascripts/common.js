@@ -45,6 +45,9 @@
 		},
 
 		setup: function(){
+			this.element.agent.set('tween', {
+				link: 'chain'
+			});
 			this.populateLists();
 			this.moveFromList();
 			this.addItem();
@@ -139,7 +142,7 @@
 		},
 		
 		sendLists: function(mode, itemId){
-			new Request.JSON({
+			new Request({
 				url: '/lists/{permalinkHash}'.substitute(todoLists),
 				method: mode ? 'post' : 'put',
 				data: Object.toQueryString(mode ? itemId : this.todo),
