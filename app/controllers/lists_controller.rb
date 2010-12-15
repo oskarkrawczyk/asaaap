@@ -46,7 +46,7 @@ class ListsController < ApplicationController
       params[:list][:list_items_attributes] = @active_tasks
       @list.update_attributes(params[:list])
     end
-    
+    render :text => "ok"
   end
   
 end
