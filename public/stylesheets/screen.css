@@ -223,3 +223,9 @@ a {
 	padding: 50px;
 	display: none;
 }
+
+#donation {
+	position: absolute;
+	top: -900em;
+	left: -900em;
+}
