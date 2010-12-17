@@ -134,6 +134,12 @@ a {
 		margin-bottom: 10px;
 	}
 	
+	.todoList .noTasks {
+		font-size: .9em;
+		color: #757575;
+		padding: 5px 0 0;
+	}
+	
 	.todoList ul {
 	}
 	

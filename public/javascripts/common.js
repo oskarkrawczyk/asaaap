@@ -26,6 +26,10 @@
 			(function(){
 				this.removeClass(className);
 			}).delay(100, this);
+		},
+		
+		listInfo: function(mode){
+			this.getParent('form').getElement('.noTasks')[mode]();
 		}
 	});
     
@@ -63,21 +67,23 @@
 		populateLists: function(){
 			
 			// populate the active items
-			this.todo.active.each(function(item) {
-				this.activeTemplate += this.template.substitute(item);
-			}, this);
-			this.element.activeList.adopt(Elements.from(this.activeTemplate));
+			this.populateList(this.todo.active, this.activeTemplate, this.element.activeList);
 
 			// populate the inactive items
-			this.todo.done.each(function(item) {
-				this.doneTemplate += this.template.substitute(item);
-			}, this);
-			this.element.doneList.adopt(Elements.from(this.doneTemplate));
+			this.populateList(this.todo.done, this.doneTemplate, this.element.doneList);
 			
 			// make sure the checkboxes are checked
 			this.element.doneList.getElements('input').each(function(field){
 				field.checked = true;
 			});
+		},
+		
+		populateList: function(items, template, listEl){
+			items.each(function(item) {
+				template += this.template.substitute(item);
+			}, this);
+			listEl.adopt(Elements.from(template));
+			listEl.listInfo(items.length < 1 ? 'show' : 'hide');
 		},
 
 		moveFromList: function(){
@@ -106,6 +112,7 @@
 				this.todo.active = [itemData].append(this.todo.active);
 				itemFrom.set('value', '');
 				itemFrom.flashClass('boom');
+				this.element.activeList.listInfo('hide');
 			}
 			this.sendLists();
 		},
@@ -115,6 +122,8 @@
 			this.todo.done = this.updateList(this.element.doneList);
 			this.todo.active = this.updateList(this.element.activeList);
 			this.sendLists();
+			this.element.doneList.listInfo(this.todo.done.length < 1 ? 'show' : 'hide');
+			this.element.activeList.listInfo(this.todo.active.length < 1 ? 'show' : 'hide');
 		},
 		
 		showAgent: function(){
@@ -140,6 +149,9 @@
 			event.stop();
 			var list = event.target.getPrevious('input').checked ? this.todo.done : this.todo.active;
 			var itemCont = event.target.getParent();
+			if (list.length <= 1){
+				itemCont.listInfo('show');
+			}
 			Object.each(list, function(item){
 				if (item.id == itemCont.get('data-id')){
 					itemCont.destroy();
