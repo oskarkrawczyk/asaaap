@@ -19,6 +19,13 @@
 				tween.callChain();
 			}.bind(this));
 			return this;
+		},
+		
+		flashClass: function(className){
+			this.addClass(className);
+			(function(){
+				this.removeClass(className);
+			}).delay(100, this);
 		}
 	});
     
@@ -82,13 +89,13 @@
 
 		addItem: function(){
 			this.element.omnibox.addEvents({
-				submit: this.submitItem.bind(this)
+				'submit': this.submitItem.bind(this)
 			});
 		},
 		
 		submitItem: function(event){
 			event.stop();
-			var itemFrom = event.target.getElement('input[type=text]');
+			var itemFrom = this.element.omnibox.getElement('input[type=text]');
 			var itemData = {
 				title: itemFrom.get('value'),
 				id: String.uniqueID()
@@ -98,6 +105,7 @@
 				Elements.from(item).inject(this.element.activeList, 'top').highlight();
 				this.todo.active = [itemData].append(this.todo.active);
 				itemFrom.set('value', '');
+				itemFrom.flashClass('boom');
 			}
 			this.sendLists();
 		},
