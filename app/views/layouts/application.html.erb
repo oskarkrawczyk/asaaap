@@ -35,13 +35,24 @@
 			</style>
 		<![endif]-->
 
-	  <%= javascript_include_tag "mootools-core-1.3-full-compat", "mootools-more", "common" %>
+		<%= javascript_include_tag "mootools", "common" %>
 
-	  <%= csrf_meta_tag %>
+		<%= csrf_meta_tag %>
 
 		<script type="text/javascript" charset="utf-8">
 			//<![CDATA[
 				<%= yield :script %>
+				
+				window.addEvents({
+					load: function(){
+						document.id('donate').addEvents({
+							click: function(e){
+								e.stop();
+								document.id('donation').submit();
+							}
+						});
+					}
+				});
 			//]]>
 		</script>
 
@@ -65,15 +76,30 @@
 	<body>
 		<div id="wrapper">
 			<div id="page-branding">
-				<h1><a title="ASAP! A Simple Anonymous Plan" href="/">ASAP! A Simple Anonymous Plan</a></h1>
+				<h1><a title="ASAP! A Simple Anonymous Plan" href="http://asaaap.com">ASAP! A Simple Anonymous Plan</a></h1>
 			</div> <!-- /page-brading -->
 			
 			<%= yield %>
 			
+			<div id="site-info">
+				<p><strong>Need more features?</strong> Listen, we like beer, why not to <a id="donate" title="Donate via PayPal" href="#donate">donate a few bucks</a>, while asking for new functionality.</p>
+				<p class="info">ASAP! is brought to you by <a title="nouincolor" href="http://nouincolor.com">nouincolor</a> in association with <a title="Bogusław Tolarz" href="http://twitter.com/btolarz">Bogusław Tolarz</a>. All your rights are belong to us!</p>
+			</div> <!-- /site-info -->
+			
+			<form id="donation" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+				<fieldset>
+					<legend>Get us a beer!</legend>
+					<input type="hidden" name="cmd" value="_s-xclick" />
+					<input type="hidden" name="hosted_button_id" value="MPCLGGQD4MPUE" />
+					<input type="image" src="https://www.paypal.com/en_GB/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online." />
+					<img alt="" border="0" src="https://www.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1" />
+				</fieldset>
+			</form>
+			
 			<div id="agent">
 				<span>Saving</span>
 			</div> <!-- /agent -->
-		</div> 
+		</div>
 		
 		<div id="ie">
 			Hold on there sparky! Using IE? Really? Come on now. You really need to move on and get a <a title="" href="http://google.com/chrome">better browser</a>.
