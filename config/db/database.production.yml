@@ -1,0 +1,18 @@
+default: &default
+  adapter: mysql2
+  username: asapdb
+  password: forfiter18
+  host: mysql.nouincolor.com
+  database: asap_list
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+
+cucumber:
+  <<: *default
