@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://opengraphprotocol.org/schema/">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 		<meta http-equiv="content-language" content="en" />
 		
-		<meta name="description" content="ASAP! A Simple Anonymous Plan" />
+		<meta name="description" content="Create a simple anonymous todo list in a snap. No account needed, just click and go!" />
 		<meta name="keywords" content="todo, app, list, simple, no account" />
 		<meta name="language" content="en-US" />
 		<meta name="classification" content="public" />
 		<meta name="resource-type" content="document" />
-		<meta name="author" content="Oskar Krawczyk and Bogusław Tolarz" />
-		<meta name="copyright" content="Oskar Krawczyk and Bogusław Tolarz" />
+		<meta name="author" content="Oskar Krawczyk (nouincolor.com) and Bogusław Tolarz" />
+		<meta name="copyright" content="Oskar Krawczyk (nouincolor.com) and Bogusław Tolarz" />
 		
 		<!-- iPhone -->
 		<!-- <meta name="viewport" content="width=device-width, maximum-scale=1.0" /> -->
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-touch-fullscreen" content="yes" />
 		
-		<meta name="robots" content="index,follow" />
-		<meta name="googlebot" content="index,follow" />
-		<meta name="geo.region" content="UK" />
-		<meta name="geo.placename" content="England" />
+		<meta name="robots" content="index, nofollow" />
+		<meta name="googlebot" content="index, nofollow" />
+		<meta name="geo.region" content="Warsaw" />
+		<meta name="geo.placename" content="Poland" />
+		<meta property="og:locality" content="Warsaw"/>
+	    <meta property="og:region" content="Mazowieckie"/>
+	    <meta property="og:country-name" content="Poland"/>
+		<meta property="og:title" content="ASAP! A Simple Anonymous Plan" />
+		<meta property="og:type" content="application" />
+		<meta property="og:url" content="http://asaaap.com/" />
+		<meta property="og:image" content="http://asaaap.com/images/logo.png" />
+		<meta property="og:site_name" content="ASAP! A Simple Anonymous Plan"/>
+		<meta property="og:description" content="Create a simple anonymous todo list in a snap. No account needed, just click and go!" />
 		
 		<%= stylesheet_link_tag "reset.min", "screen.min" %>
 		
@@ -77,7 +86,7 @@
 			
 			<div id="site-info">
 				<p><strong>Need more features?</strong> Listen, we like beer, why not to <a id="donate" title="Donate via PayPal" href="#donate">donate a few bucks</a>, while asking for new functionality.</p>
-				<p class="info">ASAP! is brought to you by <a title="nouincolor" href="http://nouincolor.com">nouincolor</a> in association with <a title="Bogusław Tolarz" href="http://twitter.com/btolarz">Bogusław Tolarz</a>. All your rights are belong to us!</p>
+				<p class="info">ASAP! is brought to you by <a title="nouincolor" href="http://nouincolor.com">nouincolor</a> in association with <a title="Bogusław Tolarz" href="http://twitter.com/btolarz">Bogusław Tolarz</a>. All rights reserved.</p>
 			</div> <!-- /site-info -->
 			
 			<form id="donation" action="https://www.paypal.com/cgi-bin/webscr" method="post">

@@ -206,18 +206,26 @@ a {
 	border-top: solid 1px #EAEDEC;
 	padding: 15px 0;
 	margin-top: 70px;
+	
 }
 
 	#site-info p {
 		margin-bottom: 10px;
 		font-size: .9em;
-		color: #888;
+		opacity: 0.3;
+		-webkit-transition: opacity 0.3s;
+		-moz-transition: opacity 0.3s;
+		-o-transition: opacity 0.3s;
 	}
 	
 	#site-info p a:hover {
 		border-bottom: solid 1px #AD2A1A;
 	}
-
+	
+	#site-info:hover p {
+		opacity: 1;
+	}
+	
 #ie {
 	text-align: center;
 	padding: 50px;
