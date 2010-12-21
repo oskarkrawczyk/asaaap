@@ -6,6 +6,7 @@ body {
 	font-family: Helvetica, Arial, Verdana, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-size: .9em;
+	overflow-x: hidden;
 }
 
 a {
@@ -30,7 +31,7 @@ a {
 		}
 
 #wrapper {
-	width: 450px;
+	width: 456px;
 	margin: 0 auto 40px;
 	position: relative;
 }
@@ -40,9 +41,9 @@ a {
 	top: -80px;
 	left: 50%;
 	margin-left: 250px;
-	width: 66px;
-	height: 66px;
-	background: url(/images/info.png) 0 100% no-repeat;
+	width: 69px;
+	height: 70px;
+	background: url(/images/info.png) 0 0 no-repeat;
 }
 
 	#agent span {
@@ -103,7 +104,7 @@ a {
 
 	#omni-box fieldset {
 		padding: 10px 10px 19px;
-		background: #F7F9F8 url(/images/omnibg.png) 0 0 no-repeat;
+		background: url(/images/omnibg.png) 0 0 repeat-x;
 	}
 
 		#omni-box fieldset input {
@@ -111,7 +112,7 @@ a {
 			padding: 13px 10px;
 			font-size: 1.1em;
 			display: block;
-			width: 408px;
+			width: 414px;
 			outline: none;
 		}
 		

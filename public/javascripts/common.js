@@ -32,7 +32,6 @@
 			this.getParent('form').getElement('.noTasks')[mode]();
 		}
 	});
-    
 
 	var AsapList = this.AsapList = new Class({
 
