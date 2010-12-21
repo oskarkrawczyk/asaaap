@@ -41,7 +41,7 @@
 		initialize: function(presetList){
 			self = this;
 			this.todo = presetList;
-			this.template = '<li data-id="{id}"><input type="checkbox" /> <span>{title}</span> <a href="#">Delete</a></li>';
+			this.template = '<li data-id="{id}" data-title="{title}"><input type="checkbox" /> <span>{title}</span> <a href="#">Delete</a></li>';
 			this.activeTemplate = '';
 			this.doneTemplate = '';
 			this.element = {
@@ -111,17 +111,17 @@
 				Elements.from(item).inject(this.element.activeList, 'top').highlight();
 				this.todo.active = [itemData].append(this.todo.active);
 				itemFrom.set('value', '');
-				itemFrom.flashClass('boom');
 				this.element.activeList.listInfo('hide');
+				this.sendItem(itemData, 'add');
 			}
-			this.sendLists();
+			//this.sendLists();
 		},
 
 		moveItem: function(event){
 			event.target.getParent().moveTo(event.target.checked ? this.element.doneList : this.element.activeList);
 			this.todo.done = this.updateList(this.element.doneList);
 			this.todo.active = this.updateList(this.element.activeList);
-			this.sendLists();
+			this.sendItem(event.target.getParent(), event.target.checked ? 'done' : 'active');
 			this.element.doneList.listInfo(this.todo.done.length < 1 ? 'show' : 'hide');
 			this.element.activeList.listInfo(this.todo.active.length < 1 ? 'show' : 'hide');
 		},
@@ -156,7 +156,7 @@
 				if (item.id == itemCont.get('data-id')){
 					itemCont.destroy();
 					list = list.erase(item);
-					this.sendLists();
+					this.sendItem(itemCont, 'delete');
 				}
 			}.bind(this));
 		},
@@ -169,8 +169,28 @@
 				onSuccess: this.hideAgent.bind(this),
 				onRequest: this.showAgent.bind(this)
 			}).send();
+		},
+		
+		sendItem: function(item, mode){
+			if (typeOf(item) === 'element'){
+				item = {
+					'title': item.get('data-title'),
+					'id': item.get('data-id')
+				};
+			}
+			
+			new Request({
+				url: '/lists/{permalinkHash}'.substitute(todoLists),
+				method: 'put',
+				data: Object.toQueryString({
+					'id': this.todo.permalinkHash + ':' + item.id,
+					'title': item.title,
+					'mode': mode
+				}),
+				onSuccess: this.hideAgent.bind(this),
+				onRequest: this.showAgent.bind(this)
+			}).send();
 		}
-
 	});
 
 })();
