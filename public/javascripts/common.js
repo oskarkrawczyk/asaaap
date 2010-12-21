@@ -161,16 +161,6 @@
 			}.bind(this));
 		},
 		
-		sendLists: function(){
-			new Request({
-				url: '/lists/{permalinkHash}'.substitute(todoLists),
-				method: 'put',
-				data: Object.toQueryString(this.todo),
-				onSuccess: this.hideAgent.bind(this),
-				onRequest: this.showAgent.bind(this)
-			}).send();
-		},
-		
 		sendItem: function(item, mode){
 			if (typeOf(item) === 'element'){
 				item = {
