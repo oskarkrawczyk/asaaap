@@ -21,13 +21,6 @@
 			return this;
 		},
 		
-		flashClass: function(className){
-			this.addClass(className);
-			(function(){
-				this.removeClass(className);
-			}).delay(100, this);
-		},
-		
 		listInfo: function(mode){
 			this.getParent('form').getElement('.noTasks')[mode]();
 		}
