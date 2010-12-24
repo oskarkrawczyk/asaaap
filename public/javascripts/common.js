@@ -71,10 +71,14 @@
 		},
 		
 		populateList: function(items, template, listEl){
+			
+			// concat the template strings
 			items.each(function(item) {
 				template += this.template.substitute(item);
 			}, this);
 			listEl.adopt(Elements.from(template));
+			
+			// either, show or hide the info message
 			listEl.listInfo(items.length < 1 ? 'show' : 'hide');
 		},
 
@@ -87,7 +91,7 @@
 
 		addItem: function(){
 			this.element.omnibox.addEvents({
-				'submit': this.submitItem.bind(this)
+				submit: this.submitItem.bind(this)
 			});
 		},
 		
@@ -98,22 +102,41 @@
 				title: itemFrom.get('value'),
 				id: String.uniqueID()
 			};
+			
+			// Can't add empty items
 			if (itemFrom.get('value').trim() !== ''){
 				var item = this.template.substitute(itemData);
+				
+				// Inject and flash
 				Elements.from(item).inject(this.element.activeList, 'top').highlight();
+				
+				// Add to the global list
 				this.todo.active = [itemData].append(this.todo.active);
+				
+				// Clear the OmniBox
 				itemFrom.set('value', '');
+				
+				// Hide the message inside the list
 				this.element.activeList.listInfo('hide');
+				
+				// Store the new item
 				this.sendItem(itemData, 'add');
 			}
-			//this.sendLists();
 		},
 
 		moveItem: function(event){
+			
+			// Move elements between lists
 			event.target.getParent().moveTo(event.target.checked ? this.element.doneList : this.element.activeList);
+			
+			// Update objects with the new order/items
 			this.todo.done = this.updateList(this.element.doneList);
 			this.todo.active = this.updateList(this.element.activeList);
+			
+			// Mark items as done/active
 			this.sendItem(event.target.getParent(), event.target.checked ? 'done' : 'active');
+			
+			// Be sure to show/hide the empty-list-message
 			this.element.doneList.listInfo(this.todo.done.length < 1 ? 'show' : 'hide');
 			this.element.activeList.listInfo(this.todo.active.length < 1 ? 'show' : 'hide');
 		},
@@ -139,39 +162,55 @@
 
 		deleteItem: function(event){
 			event.stop();
+			
+			// Switch lists
 			var list = event.target.getPrevious('input').checked ? this.todo.done : this.todo.active;
 			var itemCont = event.target.getParent();
+			
+			// Show the empty-list-message if it's empty
 			if (list.length <= 1){
 				itemCont.listInfo('show');
 			}
+			
+			// Destroy the element and the object
 			Object.each(list, function(item){
 				if (item.id == itemCont.get('data-id')){
 					itemCont.destroy();
 					list = list.erase(item);
+					
+					// Tell the backend, the object needs to be destroyed
 					this.sendItem(itemCont, 'delete');
 				}
 			}.bind(this));
 		},
 		
-		sendItem: function(item, mode){
+		parseElement: function(){
 			if (typeOf(item) === 'element'){
 				item = {
-					'title': item.get('data-title'),
-					'id': item.get('data-id')
+					title: item.get('data-title'),
+					id: item.get('data-id')
 				};
 			}
-			
+		},
+		
+		sendItem: function(item, mode){
+			this.parseElement(item);
+			this.storeOrder(item, mode);
+		},
+		
+		storeOrder: function(item){
 			new Request({
-				url: '/lists/{permalinkHash}'.substitute(todoLists),
+				url: '/lists/{permalinkHash}'.substitute(this.todo),
 				method: 'put',
 				data: Object.toQueryString({
-					'id': this.todo.permalinkHash + ':' + item.id,
-					'title': item.title,
-					'mode': mode
+					id: this.todo.permalinkHash + ':' + item.id,
+					title: item.title,
+					mode: mode
 				}),
 				onSuccess: this.hideAgent.bind(this),
 				onRequest: this.showAgent.bind(this)
 			}).send();
+			
 		}
 	});
 
