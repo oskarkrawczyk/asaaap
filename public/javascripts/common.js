@@ -184,21 +184,23 @@
 			}.bind(this));
 		},
 		
-		parseElement: function(){
+		parseElement: function(item){
+			
+			// If passed reference is an element, objectify it - in a completely, non-sexual way!
 			if (typeOf(item) === 'element'){
 				item = {
 					title: item.get('data-title'),
 					id: item.get('data-id')
 				};
 			}
+			return item;
 		},
 		
 		sendItem: function(item, mode){
-			this.parseElement(item);
-			this.storeOrder(item, mode);
+			this.storeOrder(this.parseElement(item), mode);
 		},
 		
-		storeOrder: function(item){
+		storeOrder: function(item, mode){
 			new Request({
 				url: '/lists/{permalinkHash}'.substitute(this.todo),
 				method: 'put',
@@ -210,8 +212,8 @@
 				onSuccess: this.hideAgent.bind(this),
 				onRequest: this.showAgent.bind(this)
 			}).send();
-			
 		}
 	});
 
 })();
+
