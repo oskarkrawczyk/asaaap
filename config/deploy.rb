@@ -6,7 +6,7 @@ set :applicationdir, "/home/#{user}/#{application}"  # The standard Dreamhost se
 
 # version control config
 set :scm, 'git'
-set :repository,  "git@github.com:btolarz/asap-list.git"
+set :repository,  "git@github.com:oskarkrawczyk/asap-list.git"
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 0 # if you have vendored rails
 set :branch, 'master'
@@ -30,4 +30,10 @@ set :use_sudo, false
 
 task :after_update_code do
   run "ln -nfs #{deploy_to}/#{shared_dir}/config/database.yml #{release_path}/config/database.yml"
+end
+
+namespace :deploy do
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
 end
