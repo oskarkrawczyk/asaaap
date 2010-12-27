@@ -1,3 +1,5 @@
+require "bundler/capistrano"
+
 set :user, 'asaaap'  # Your dreamhost account's username
 set :domain, 'asaaap.com'  # Dreamhost servername where your account is located 
 set :project, 'asap-list'  # Your application as its called in the repository
