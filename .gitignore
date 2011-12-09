@@ -23,3 +23,5 @@ config/*.yml
 rerun.txt
 nbproject
 .DS_Store
+
+config/db/database.production.yml
