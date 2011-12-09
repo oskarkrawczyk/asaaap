@@ -1,9 +1,9 @@
 default: &default
   adapter: mysql2
   username: asapdb
-  password: forfiter18
-  host: mysql.nouincolor.com
-  database: asap_list
+  password: 
+  host: 
+  database: 
 
 development:
   <<: *default
