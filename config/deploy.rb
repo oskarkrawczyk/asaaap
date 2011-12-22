@@ -1,14 +1,14 @@
 require "bundler/capistrano"
 
 set :user, 'asaaap'  # Your dreamhost account's username
-set :domain, 'asaaap.com'  # Dreamhost servername where your account is located 
-set :project, 'asap-list'  # Your application as its called in the repository
+set :domain, 'todo.nouincolor.com'  # Dreamhost servername where your account is located 
+set :project, 'asaaap'  # Your application as its called in the repository
 set :application, 'asaaap.com/'  # Your app's location (domain or sub-domain name as setup in panel)
 set :applicationdir, "/home/#{user}/#{application}"  # The standard Dreamhost setup
 
 # version control config
 set :scm, 'git'
-set :repository,  "git@github.com:oskarkrawczyk/asap-list.git"
+set :repository,  "git@github.com:oskarkrawczyk/asaaap.git"
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 0 # if you have vendored rails
 set :branch, 'master'

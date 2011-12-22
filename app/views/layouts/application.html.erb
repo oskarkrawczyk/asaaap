@@ -1,112 +1,81 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://opengraphprotocol.org/schema/">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-		<meta http-equiv="content-language" content="en" />
-		
-		<meta name="description" content="Create a simple anonymous todo list in a snap. No account needed, just click and go!" />
-		<meta name="keywords" content="todo, app, list, simple, no account" />
-		<meta name="language" content="en-US" />
-		<meta name="classification" content="public" />
-		<meta name="resource-type" content="document" />
-		<meta name="author" content="Oskar Krawczyk (nouincolor.com) and Bogusław Tolarz" />
-		<meta name="copyright" content="Oskar Krawczyk (nouincolor.com) and Bogusław Tolarz" />
-		
-		<!-- iPhone -->
-		<!-- <meta name="viewport" content="width=device-width, maximum-scale=1.0" /> -->
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-touch-fullscreen" content="yes" />
-		
-		<meta name="robots" content="index, nofollow" />
-		<meta name="googlebot" content="index, nofollow" />
-		<meta name="geo.region" content="Warsaw" />
-		<meta name="geo.placename" content="Poland" />
-		<meta property="og:locality" content="Warsaw"/>
-		<meta property="og:region" content="Mazowieckie"/>
-		<meta property="og:country-name" content="Poland"/>
-		<meta property="og:title" content="ASAP! A Simple Anonymous Plan" />
-		<meta property="og:type" content="application" />
-		<meta property="og:url" content="http://asaaap.com/" />
-		<meta property="og:image" content="http://asaaap.com/images/logo.png" />
-		<meta property="og:site_name" content="ASAP! A Simple Anonymous Plan"/>
-		<meta property="og:description" content="Create a simple anonymous todo list in a snap. No account needed, just click and go!" />
-		
-		<%= stylesheet_link_tag "reset", "screen" %>
-		
-		<!--[if IE]>
-			<meta http-equiv="imagetoolbar" content="no" />
-			<meta http-equiv="X-UA-Compatible" content="IE=8" />
-			<style type="text/css" media="screen">
-				#wrapper {display: none}
-				#ie {display: block}
-			</style>
-		<![endif]-->
+<html xmlns:og="http://opengraphprotocol.org/schema/">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-language" content="en" />
+    
+    <meta name="description" content="Create a simple anonymous todo list in a snap. No account needed, just click and go!" />
+    <meta name="keywords" content="todo, app, list, simple, no account" />
+    <meta name="language" content="en-US" />
+    <meta name="classification" content="public" />
+    <meta name="resource-type" content="document" />
+    <meta name="author" content="Oskar Krawczyk (nouincolor.com) and Bogusław Tolarz" />
+    <meta name="copyright" content="Oskar Krawczyk (nouincolor.com) and Bogusław Tolarz" />
+    
+    <!-- iPhone -->
+    <!-- <meta name="viewport" content="width=device-width, maximum-scale=1.0" /> -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    
+    <meta name="robots" content="index, nofollow" />
+    <meta name="googlebot" content="index, nofollow" />
+    <meta name="geo.region" content="Warsaw" />
+    <meta name="geo.placename" content="Poland" />
+    <meta property="og:locality" content="Warsaw"/>
+    <meta property="og:region" content="Mazowieckie"/>
+    <meta property="og:country-name" content="Poland"/>
+    <meta property="og:title" content="ASAP! A Simple Anonymous Plan" />
+    <meta property="og:type" content="application" />
+    <meta property="og:url" content="http://asaaap.com/" />
+    <meta property="og:image" content="http://asaaap.com/images/logo.png" />
+    <meta property="og:site_name" content="ASAP! A Simple Anonymous Plan"/>
+    <meta property="og:description" content="Create a simple anonymous todo list in a snap. No account needed, just click and go!" />
+    
+    <%= stylesheet_link_tag "reset", "screen" %>
+    
+    <!--[if IE]>
+      <meta http-equiv="imagetoolbar" content="no" />
+      <meta http-equiv="X-UA-Compatible" content="IE=8" />
+      <style type="text/css" media="screen">
+        #wrapper {display: none}
+        #ie {display: block}
+      </style>
+    <![endif]-->
 
-		<%= javascript_include_tag "mootools", "common" %>
+    <%= javascript_include_tag "mootools", "common" %>
 
-		<%= csrf_meta_tag %>
-		<title>ASAP! A Simple Anonymous Plan</title>
+    <%= csrf_meta_tag %>
+    <title>ASAP! A Simple Anonymous Plan</title>
 
-		<script type="text/javascript" charset="utf-8">
-			//<![CDATA[
-				<%= yield :script %>
-				
-				window.addEvents({
-					load: function(){
-						document.id('donate').addEvents({
-							click: function(e){
-								e.stop();
-								document.id('donation').submit();
-							}
-						});
-					}
-				});
-				
-				var _gaq = _gaq || [];
-				_gaq.push(['_setAccount', 'UA-165199-9']);
-				_gaq.push(['_trackPageview']);
+    <script type="text/javascript" charset="utf-8">
+      //<![CDATA[
+        <%= yield :script %>
+      //]]>
+    </script>
+  </head>
 
-				(function() {
-					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				})();
-			//]]>
-		</script>
-	</head>
-
-	<body>
-		<div id="wrapper">
-			<div id="page-branding">
-				<h1><a title="ASAP! A Simple Anonymous Plan" href="http://asaaap.com">ASAP! A Simple Anonymous Plan</a></h1>
-			</div> <!-- /page-brading -->
-			
-			<%= yield %>
-			
-			<div id="site-info">
-				<p><strong>Need more features?</strong> Listen, we like beer, why not to <a id="donate" title="Donate via PayPal" href="#donate">donate a few bucks</a>, while asking for new functionality.</p>
-				<p class="info">ASAP! is brought to you by <a title="nouincolor" href="http://nouincolor.com">nouincolor</a> in association with <a title="Bogusław Tolarz" href="http://twitter.com/btolarz">Bogusław Tolarz</a>. All rights reserved.</p>
-			</div> <!-- /site-info -->
-			
-			<form id="donation" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-				<fieldset>
-					<legend>Get us a beer!</legend>
-					<input type="hidden" name="cmd" value="_s-xclick" />
-					<input type="hidden" name="hosted_button_id" value="MPCLGGQD4MPUE" />
-					<input type="image" src="https://www.paypal.com/en_GB/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online." />
-					<img alt="" border="0" src="https://www.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1" />
-				</fieldset>
-			</form>
-			
-			<div id="agent">
-				<span>Saving</span>
-			</div> <!-- /agent -->
-		</div>
-		
-		<div id="ie">
-			Hold on there sparky! Using IE? Really? Come on now. You really need to move on and get a <a title="" href="http://google.com/chrome">better browser</a>.
-		</div> <!-- /ie -->
-		
-	</body>
+  <body>
+    <div id="wrapper">
+      <div id="page-branding">
+        <h1><a title="ASAP! A Simple Anonymous Plan" href="http://asaaap.com">ASAP! A Simple Anonymous Plan</a></h1>
+      </div> <!-- /page-brading -->
+      
+      <%= yield %>
+      
+      <!-- <div id="site-info">
+        <p><strong>Need more features?</strong> Listen, we like beer, why not to <a id="donate" title="Donate via PayPal" href="#donate">donate a few bucks</a>, while asking for new functionality.</p>
+        <p class="info">ASAP! is brought to you by <a title="nouincolor" href="http://nouincolor.com">nouincolor</a> in association with <a title="Bogusław Tolarz" href="http://twitter.com/btolarz">Bogusław Tolarz</a>. All rights reserved.</p>
+      </div> -->
+      
+      <div id="agent">
+        <span>Saving</span>
+      </div> <!-- /agent -->
+    </div>
+    
+    <div id="ie">
+      Hold on there sparky! Using IE? Really? Come on now. You really need to move on and get a <a title="" href="http://google.com/chrome">better browser</a>.
+    </div> <!-- /ie -->
+    
+  </body>
 </html>
